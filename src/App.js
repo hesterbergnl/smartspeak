@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import KeyForm from './components/KeyForm'
 import SentenceForm from './components/SentenceForm'
 import SmartText from './components/SmartText'
+import OpenAIAPIService from './services/OpenAIAPIService.js'
+
 
 const App = () => {
   const [smartSentence, setSmartSentence] = useState('')
@@ -20,8 +22,18 @@ const App = () => {
     event.preventDefault()
 
     console.log(`Make the following sentence sound smarter "${sentenceEntry}"`)
-    setSmartSentence(sentenceEntry)
-    setSentenceEntry('')
+    const button = document.getElementById('submit-button')
+
+    button.disabled = true
+
+    OpenAIAPIService.getSmart(sentenceEntry, keyEntry)
+      .then(response => {
+        console.log(response)
+        setSmartSentence(response.choices[0].message.content)
+        button.disabled = false
+      })
+
+
   }
 
   return (

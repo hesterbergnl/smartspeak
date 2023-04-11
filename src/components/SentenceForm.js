@@ -6,7 +6,7 @@ const SentenceForm = (props) => {
                 <textarea value={props.sentenceEntry} onChange={props.updateSentenceEntry} rows="5" cols="60"/>
             </div>
             <div>
-                <button type="submit">Make Smart</button>
+                <button id="submit-button" type="submit">Make Smart</button>
             </div>
         </form>
     )
